@@ -130,6 +130,7 @@ val sharedSettingsWithoutScalaVersion = Seq(
   Test / publishArtifact := false,
   pomIncludeRepository := { _ => false },
   publishMavenStyle := true,
+  isSnapshot := true,
   publishConfiguration := publishConfiguration.value.withOverwrite(true),
   publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true),
   pomExtra :=
