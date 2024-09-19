@@ -343,7 +343,10 @@ trait ServiceTemplate { self: TemplateGenerator =>
           "funcName" -> genID(f.funcName.toCamelCase),
           "argNames" -> {
             val code = f.args
-              .map { field => genID(field.sid).toData }
+              .map {
+                case field if field.requiredness.isOptional => CodeFragment(s"Option[${genType(field.fieldType)}]")
+                case arg                                    => genType(field.fieldType)
+              }
               .mkString(", ")
             v(code)
           },
